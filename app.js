@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const uuid = require('uuid');
 const express = require('express');
 const app = express();
-var port = process.env.port || 3000;
+var port = process.env.PORT || 3000;
 
 const encrypt = require('./user_modules/encryption');
 const pool = require('./user_modules/sqlpool').pool;
