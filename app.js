@@ -30,6 +30,11 @@ var checkForUser = function(data){
     });
 }
 
+//Home page
+app.get('/',(req,res)=>{
+    res.send("Use /register and /login for api calls!");
+})
+
 //Registration POST API
 app.post('/register', (req, res, next) => {
     console.log('Registering');
