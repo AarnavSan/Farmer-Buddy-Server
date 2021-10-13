@@ -63,7 +63,7 @@ app.post('/register', (req, res, next) => {
         console.log(temp);
     }
     else{
-        var temp = await checkForUser(['SELECT phone_number FROM app_user where phone_number=? LIMIT 1;',email]);
+        var temp = await checkForUser(['SELECT phone_number FROM app_user where phone_number=? LIMIT 1;',phone_number]);
         if(temp){
             userExists = true;
         }
