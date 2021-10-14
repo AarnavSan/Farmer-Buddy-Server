@@ -30,32 +30,9 @@ var checkForUser = function(data){
     });
 }
 
-//Home page
-app.get('/',(req,res)=>{
-    res.send("Use /register and /login for api calls!");
-})
-
-//Registration POST API
-app.post('/register', (req, res, next) => {
-    console.log('Registering');
-    var post_data = req.body;
-    var uid = uuid.v4();
-    var plaint_password = post_data.password;
-    var hash_data = encrypt.saltHashPassword(plaint_password);
-    var password = hash_data.passwordHash;
-    var salt = hash_data.salt;
-
-    var fname = post_data.fname;
-    var lname = post_data.lname;
-    var email = post_data.email ;
-    var phone_number = post_data.phone_number;
-    var bdate = post_data.bdate;
-    var sex = post_data.sex;
-    var occupation = post_data.occupation;
-
-    var userExists = false;
-
-    async function checkingForUserQueries(){
+//async function for checking duplicate registrations
+//and registering users
+async function checkingForUserQueries(email, phone_number,p){
     try
     {
     //Checking to see if user exists
@@ -82,7 +59,7 @@ app.post('/register', (req, res, next) => {
     {
         if(phone_number!=undefined && email!=undefined)
         {
-            var p = [uid, fname, lname, email, phone_number, password, salt, bdate, sex, occupation];
+            // var p = [uid, fname, lname, email, phone_number, password, salt, bdate, sex, occupation];
             pool.query(bothRegSQL + '(?,?,?,?,?,?,?,?,?,?,NOW());', p,
                 function (err, result, fields) {
                     if(err) {
@@ -94,7 +71,7 @@ app.post('/register', (req, res, next) => {
         }
         else if(email!=undefined)
         {
-            var p = [uid, fname, lname, email, password, salt, bdate, sex, occupation];
+            // var p = [uid, fname, lname, email, password, salt, bdate, sex, occupation];
             pool.query(emailRegSQL + '(?,?,?,?,?,?,?,?,?,NOW());', p,
                 function (err, result, fields) {
                     if(err) {
@@ -105,7 +82,7 @@ app.post('/register', (req, res, next) => {
                 });
         }
         else{
-            var p = [uid, fname, lname, phone_number, password, salt, bdate, sex, occupation];
+            // var p = [uid, fname, lname, phone_number, password, salt, bdate, sex, occupation];
             pool.query(phoneRegSQL + '(?,?,?,?,?,?,?,?,?,NOW());', p,
                 function (err, result, fields) {
                     if(err) {
@@ -125,7 +102,44 @@ app.post('/register', (req, res, next) => {
     }
 }
 
-    checkingForUserQueries();
+//Home page
+app.get('/',(req,res)=>{
+    res.send("Use /register and /login for api calls!");
+})
+
+//Registration POST API
+app.post('/register', (req, res, next) => {
+    console.log('Registering');
+    var post_data = req.body;
+    var uid = uuid.v4();
+    var plaint_password = post_data.password;
+    var hash_data = encrypt.saltHashPassword(plaint_password);
+    var password = hash_data.passwordHash;
+    var salt = hash_data.salt;
+
+    var fname = post_data.fname;
+    var lname = post_data.lname;
+    var email = post_data.email ;
+    var phone_number = post_data.phone_number;
+    var bdate = post_data.bdate;
+    var sex = post_data.sex;
+    var occupation = post_data.occupation;
+
+    var userExists = false;
+
+    if(email && phone_number)
+    {
+        var p = [uid, fname, lname, email, phone_number, password, salt, bdate, sex, occupation];
+    }
+    else if(email)
+    {
+        var p = [uid, fname, lname, email, password, salt, bdate, sex, occupation];
+    }
+    else{
+        var p = [uid, fname, lname, phone_number, password, salt, bdate, sex, occupation];
+    }
+
+    checkingForUserQueries(email, phone_number, p);
 });
 
 //LOGIN POST API
