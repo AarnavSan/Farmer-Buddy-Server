@@ -32,7 +32,7 @@ var checkForUser = function(data){
 
 //async function for checking duplicate registrations
 //and registering users
-async function checkingForUserQueries(email, phone_number,p){
+async function checkingForUserQueries(email, phone_number,p,res){
     try
     {
     //Checking to see if user exists
@@ -139,7 +139,7 @@ app.post('/register', (req, res, next) => {
         var p = [uid, fname, lname, phone_number, password, salt, bdate, sex, occupation];
     }
 
-    checkingForUserQueries(email, phone_number, p);
+    checkingForUserQueries(email, phone_number, p, res);
 });
 
 //LOGIN POST API
@@ -150,7 +150,7 @@ app.post('/login',(req,res,next)=>{
     if(post_data.email!=undefined)
     {
         var email =  post_data.email;
-        pool.query('SELECT user_password,salt FROM app_user where email = ?;', [email], function (err, result, fields) {
+        pool.query('SELECT * FROM app_user where email = ?;', [email], function (err, result, fields) {
             if(err){
                 console.log(err);
             }
@@ -172,7 +172,7 @@ app.post('/login',(req,res,next)=>{
     }
     else{
         var phone_number = post_data.phone_number;
-        pool.query('SELECT user_password,salt FROM app_user where phone_number = ?;', [phone_number], function (err, result, fields) {
+        pool.query('SELECT * FROM app_user where phone_number = ?;', [phone_number], function (err, result, fields) {
             if(err){
                 console.log(err);
             }
