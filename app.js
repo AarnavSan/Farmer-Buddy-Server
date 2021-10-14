@@ -33,6 +33,7 @@ var checkForUser = function(data){
 //async function for checking duplicate registrations
 //and registering users
 async function checkingForUserQueries(email, phone_number,p,res){
+    var userExists = false;
     try
     {
     //Checking to see if user exists
@@ -124,8 +125,6 @@ app.post('/register', (req, res, next) => {
     var bdate = post_data.bdate;
     var sex = post_data.sex;
     var occupation = post_data.occupation;
-
-    var userExists = false;
 
     if(email && phone_number)
     {
