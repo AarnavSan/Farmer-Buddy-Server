@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const uuid = require('uuid');
 const express = require('express');
 const app = express();
+const path = require ('path');
 var port = process.env.PORT || 3000;
 
 const encrypt = require('./user_modules/encryption');
@@ -13,6 +14,8 @@ const bothRegSQL = 'INSERT INTO app_user(user_uuid,first_name,last_name,email,ph
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(__dirname + '/static/stylesheets'));
 
 var checkForUser = function(data){
     return new Promise((resolve, reject)=>{
@@ -105,7 +108,7 @@ async function checkingForUserQueries(email, phone_number,p,res){
 
 //Home Page
 app.get('/',(req,res)=>{
-    res.send("Use /register and /login for api calls!");
+    res.sendFile(path.join(__dirname + '/static/index.html'));
 })
 
 //REGISTRATION POST API
