@@ -103,12 +103,12 @@ async function checkingForUserQueries(email, phone_number,p,res){
     }
 }
 
-//Home page
+//Home Page
 app.get('/',(req,res)=>{
     res.send("Use /register and /login for api calls!");
 })
 
-//Registration POST API
+//REGISTRATION POST API
 app.post('/register', (req, res, next) => {
     console.log('Registering');
     var post_data = req.body;
