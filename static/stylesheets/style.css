@@ -38,7 +38,7 @@ html {
 @import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
 
 :root {
-  --gradient: linear-gradient(90deg, #7f7fd5, #86a8e7, #f64f59);
+  --gradient: linear-gradient(90deg, #FE964D, #4C3F99, #f64f59);
 }
 
 * {
@@ -56,7 +56,7 @@ body {
   margin: 0;
   font-size: 1.125em;
   line-height: 1.6;
-  background: #7f7fd5;
+  background: #4C3F99;
   background-size: 300%;
   background-image: var(--gradient);
   animation: bg-animation 5s infinite alternate;
@@ -72,7 +72,7 @@ body {
 }
 
 .container {
-  background: #12192c;
+  background: #1E4D1C;
   width: 70vw;
   padding: 9rem;
   box-shadow: 0 0 3rem rgba(0, 0, 0, 0.15);
@@ -92,7 +92,7 @@ body {
   font-weight: 900;
   font-style: italic;
   font-size: 3rem;
-  color: #7f7fd5;
+  color: #FE964D;
   line-height: 0.8;
   background-image: var(--gradient);
   background-clip: text;
@@ -107,30 +107,13 @@ body {
   background-position: right;
 }
 
-.btn {
-  color: #fff;
-  font: inherit;
-  border: 0;
-  cursor: pointer;
-  padding: 0.5rem 1.25rem;
-  background: var(--gradient);
-  background-size: 300%;
-  background-position: left;
-  transition: background-position 350ms;
-  border-radius: 4px;
-}
-
-.btn:hover {
-  background-position: right;
-}
-
 .credit a{
     text-decoration: none;
     color: #fff;
   }
 
   .credit {
-      color:#7f7fd5;
+      color:#FE964D;
       margin-top: 10px;
       text-align: center;
   }
