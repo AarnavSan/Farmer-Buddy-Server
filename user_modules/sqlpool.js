@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var pool  = mysql.createPool({
-    host     : 'sql6.freemysqlhosting.net',
-    user     : 'sql6448413',
-    password : '1KFZdpme7v',
-    database : 'sql6448413'
+    host     : 'http://13.127.228.42:57619/phpmyadmin/',
+    user     : 'user1',
+    password : '12345678',
+    database : 'fb1'
 });
 
 //local mysql database pool
