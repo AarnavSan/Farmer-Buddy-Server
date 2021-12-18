@@ -208,9 +208,10 @@ async function login(req, res, next) {
         var response = await getUserPass(req);
         if (response) {
             if (comparePass(req.body.password, response.salt, response.user_password))
-                res.end(JSON.stringify(response));
+                // res.end(JSON.stringify(response));
+                res.end(JSON.stringify(1));
             else {
-                res.end(JSON.stringify('Wrong Password'));
+                res.end(JSON.stringify(0));
                 next();
             }
 

@@ -1,12 +1,18 @@
 var mysql = require('mysql');
 
 var pool  = mysql.createPool({
-    host     : 'http://13.127.228.42:57619/phpmyadmin/',
-    user     : 'user1',
-    password : '12345678',
+    host     : 'localhost',
+    user     : 'root',
+    password : '',
     database : 'fb1'
 });
 
+// var pool  = mysql.createPool({
+//     host     : 'depend-prices-captured-intelligent.trycloudflare.com',
+//     user     : 'root',
+//     password : '',
+//     database : 'fb1'
+// });
 //local mysql database pool
 // var pool  = mysql.createPool({
 //     host     : 'localhost',
